@@ -318,7 +318,8 @@ class	AgileCLU:
 		request = Request(self.posturl, datagen, headers)
 
 		request.add_header("X-Agile-Authorization", self.token)
-		request.add_header("X-Content-Type", mimetype )
+		if mimetype != "auto":
+			request.add_header("X-Content-Type", mimetype )
 
 		success = False ; attempt = 0
 		while not success:
@@ -351,7 +352,7 @@ class	AgileCLU:
                 # self.pbarfname = sourceName
                 headers = []
                 headers.append(str("X-Agile-Authorization: %s" % (str(self.token))))
-                headers.append(str("X-Content-Type: %s" % (mimetype)))
+                if mimetype != "auto": headers.append(str("X-Content-Type: %s" % (mimetype)));
                 headers.append(str("X-Agile-Basename: %s" % (str(sourceName))))
                 headers.append(str("X-Agile-Directory: %s" % (str(targetPath))))
 
